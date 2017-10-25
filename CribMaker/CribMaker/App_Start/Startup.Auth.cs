@@ -1,11 +1,15 @@
-﻿using System;
+﻿#region
+
+using CribMaker.Core.Data;
+using CribMaker.Core.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using CribMaker.Models;
+using System;
+
+#endregion
 
 namespace CribMaker
 {
