@@ -285,6 +285,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CribMaker.Core\CribMaker.Core.csproj">
+      <Project>{103893c6-dab9-4b8f-b863-796912f126f5}</Project>
+      <Name>CribMaker.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CribMaker.Services\CribMaker.Services.csproj">
+      <Project>{eef3198b-4f12-4821-b714-ad5a4f83e8aa}</Project>
+      <Name>CribMaker.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
