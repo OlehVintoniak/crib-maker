@@ -1,4 +1,5 @@
-﻿using CribMaker.Core.Data.Entities;
+﻿using System.Data.Entity;
+using CribMaker.Core.Data.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CribMaker.Core.Data
@@ -13,6 +14,11 @@ namespace CribMaker.Core.Data
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

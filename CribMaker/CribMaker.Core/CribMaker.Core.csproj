@@ -70,7 +70,9 @@
     <Compile Include="Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Repositories\Impl\ApplicationUserRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\Configurations\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
