@@ -1,25 +1,25 @@
 ﻿#region
 
-using CribMaker.Services.Services;
-using CribMaker.Services.Services.Factory;
 using System.Web.Mvc;
+using CribMaker.Services.Services;
+using CribMaker.Controllers.Abstract;
+using CribMaker.Services.Services.Factory;
 
 #endregion
 
 namespace CribMaker.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : GeneralController
     {
         private readonly IApplicationUserService _userService;
 
-        public HomeController(IServiceManager serviceManager)
+        public HomeController(IServiceManager serviceManager) : base(serviceManager)
         {
-            _userService = serviceManager.ApplicationUserService;
+            _userService = ServiceManager.ApplicationUserService;
         }
 
         public ActionResult Index()
         {
-            var i = _userService.GetByUserName(User.Identity.Name);
             return View();
         }
 
