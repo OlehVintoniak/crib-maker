@@ -16,6 +16,12 @@ namespace CribMaker.Core.Migrations
         private const string AdminEmail = "admin@gmail.com";
         private const string AdminPasswrod = "1z1z1zZ_";
 
+        private static readonly string[][] DefaultUsersNames =
+        {
+            new []{"Name1","Surname1"},
+            new []{"Name2", "Surname2"},
+            new []{"Name3", "Surname3"}
+        };
         protected override void Seed(ApplicationDbContext context)
         {
             InitializeDb(context);
@@ -50,9 +56,39 @@ namespace CribMaker.Core.Migrations
                 {
                     Email = AdminEmail,
                     UserName = AdminEmail,
+                    Name = "admin",
+                    Surname = "adminuch",
                     EmailConfirmed = true
                 };
-                userManager.Create(admin, AdminPasswrod);
+                var result = userManager.Create(admin, AdminPasswrod);
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(admin.Id, Consts.Consts.AdminRole);
+                    userManager.AddToRole(admin.Id, Consts.Consts.UserRole);
+                }
+                context.SaveChanges();
+            }
+
+            foreach (var userN in DefaultUsersNames)
+            {
+                var email = userN[1] + "@gmail.com";
+                var existedUser = userHelper.GetUser(email);
+                if (existedUser != null)continue;
+
+                var user = new ApplicationUser
+                {
+                    Email = email,
+                    UserName = email,
+                    Name = userN[0],
+                    Surname = userN[1],
+                    EmailConfirmed = true
+                };
+                var result = userManager.Create(user, AdminPasswrod);
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(user.Id, Consts.Consts.UserRole);
+                }
                 context.SaveChanges();
             }
         }

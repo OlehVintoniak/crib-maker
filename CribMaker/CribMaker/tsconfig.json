@@ -14,7 +14,6 @@
   "exclude": [
   ],
   "typeAcquisition": {
-    //put here 'true' to run Gentelella index.html
-    "enable": false
+    "enable": true
   }
 }
