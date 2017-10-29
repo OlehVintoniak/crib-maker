@@ -56,8 +56,8 @@ namespace CribMaker.Core.Migrations
                 {
                     Email = AdminEmail,
                     UserName = AdminEmail,
-                    Name = "admin",
-                    Surname = "adminuch",
+                    FirstName = "admin",
+                    LastName = "adminuch",
                     EmailConfirmed = true
                 };
                 var result = userManager.Create(admin, AdminPasswrod);
@@ -80,8 +80,8 @@ namespace CribMaker.Core.Migrations
                 {
                     Email = email,
                     UserName = email,
-                    Name = userN[0],
-                    Surname = userN[1],
+                    FirstName = userN[0],
+                    LastName = userN[1],
                     EmailConfirmed = true
                 };
                 var result = userManager.Create(user, AdminPasswrod);
