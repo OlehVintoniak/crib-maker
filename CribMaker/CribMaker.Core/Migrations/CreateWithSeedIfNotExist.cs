@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Collections.Generic;
 using CribMaker.Core.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -77,7 +78,7 @@ namespace CribMaker.Core.Migrations
             {
                 var email = userN[1] + "@gmail.com";
                 var existedUser = userHelper.GetUser(email);
-                if (existedUser != null)continue;
+                if (existedUser != null) continue;
 
                 var user = new ApplicationUser
                 {
@@ -100,7 +101,24 @@ namespace CribMaker.Core.Migrations
 
         private static void InitForms(ApplicationDbContext context)
         {
-            
+            var forms = new List<Form>();
+            for (var i = 0; i < 3; i++)
+            {
+                forms.Add(new Form
+                {
+                    Name = $"{i}-Б"
+                });
+            }
+            context.Forms.AddRange(forms);
+            context.SaveChanges();
+
+            //var pupils = new List<Pupil>();
+            //pupils.Add(new Pupil
+            //{
+            //    FormId = 1,
+            //    ApplicationUser = 
+            //});
+
         }
 
 
