@@ -11,6 +11,7 @@ namespace CribMaker.Core.Data.Entities
         public string Title { get; set; }
         public string Text { get; set; }
         public bool IsGlobal { get; set; }
+        public int PupilId { get; set; }
         public virtual Pupil Pupil { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace CribMaker.Core.Data.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public int PupilId { get; set; }
-        //public virtual Pupil Pupil { get; set; }
+        public int? PupilId { get; set; }
+        public virtual Pupil Pupil { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

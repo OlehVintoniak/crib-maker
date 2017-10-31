@@ -38,6 +38,9 @@ namespace CribMaker.Core.Migrations
         {
             InitUsers(context);
         }
+
+        #region Users
+
         private static void InitUsers(ApplicationDbContext context)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -92,6 +95,14 @@ namespace CribMaker.Core.Migrations
                 context.SaveChanges();
             }
         }
+
+        #endregion
+
+        private static void InitForms(ApplicationDbContext context)
+        {
+            
+        }
+
 
         #region Helpers
 
