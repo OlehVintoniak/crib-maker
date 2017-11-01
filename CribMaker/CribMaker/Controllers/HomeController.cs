@@ -15,7 +15,7 @@ namespace CribMaker.Controllers
 
         public HomeController(IServiceManager serviceManager) : base(serviceManager)
         {
-            _userService = ServiceManager.ApplicationUserService;
+            _userService = serviceManager.ApplicationUserService;
         }
 
         public ActionResult Index()

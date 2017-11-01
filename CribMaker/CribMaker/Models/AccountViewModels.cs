@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace CribMaker.Models
@@ -55,10 +56,10 @@ namespace CribMaker.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запам'ятати?")]
         public bool RememberMe { get; set; }
     }
 
@@ -68,6 +69,16 @@ namespace CribMaker.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [DisplayName("Ім'я")]
+        [RegularExpression("^[а-яА-Я]{3,15}$", ErrorMessage = "Некоректне ім'я!")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DisplayName("Прізвище")]
+        [RegularExpression("^[а-яА-Я]{3,20}$", ErrorMessage = "Некоректне прізвище!")]
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

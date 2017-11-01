@@ -38,6 +38,7 @@ namespace CribMaker.Core.Migrations
         private static void Init(ApplicationDbContext context)
         {
             InitUsers(context);
+            InitForms(context);
         }
 
         #region Users
@@ -102,7 +103,7 @@ namespace CribMaker.Core.Migrations
         private static void InitForms(ApplicationDbContext context)
         {
             var forms = new List<Form>();
-            for (var i = 0; i < 3; i++)
+            for (var i = 1; i <= 3; i++)
             {
                 forms.Add(new Form
                 {

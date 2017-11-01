@@ -18,14 +18,14 @@
     <br>
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
         <div class="menu_section">
-            <h3>Menu</h3>
+            <h3>Меню</h3>
             <ul class="nav side-menu">
                 <li>
-                    <a><i class="fa fa-home" aria-hidden="true"></i>Home<span class="fa fa-chevron-down"></span></a>
+                    <a><i class="fa fa-home" aria-hidden="true"></i>Головна<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Головна", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Про заклад", "About", "Home")</li>
+                        <li>@Html.ActionLink("Звя'зок", "Contact", "Home")</li>
                     </ul>
                 </li>
                 @if (Request.IsAuthenticated)
@@ -41,13 +41,19 @@
 
                 }
             </ul>
-            @*@if (User.IsInRole("Admin"))
+            @if (User.IsInRole("Admin"))
             {
-                <h3>Admin</h3>
+                <h3>Адмін. панель</h3>
                 <ul class="nav side-menu">
-                    <li><a href="@Url.Action("Index","Roles")"><i class="fa fa-cogs" aria-hidden="true"></i>Roles</a></li>
+                    <li>
+                        <a><i class="fa fa-gears" aria-hidden="true"></i>Керуваня<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li>@Html.ActionLink("Класи", "Index", "Forms")</li>
+                        </ul>
+                    </li>
+                    
                 </ul>
-            }*@
+            }
         </div>
     </div>
     @if (Request.IsAuthenticated)

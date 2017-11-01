@@ -4,6 +4,7 @@ using System;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using CribMaker.Core.Data.Entities;
+using CribMaker.Services.Services;
 using CribMaker.Services.Services.Factory;
 
 #endregion
@@ -13,10 +14,10 @@ namespace CribMaker.Controllers.Abstract
     public class GeneralController : Controller
     {
         private ApplicationUser _сurrentUser;
-        protected readonly IServiceManager ServiceManager;
+        protected readonly IApplicationUserService UserService;
         protected GeneralController(IServiceManager serviceManager)
         {
-            ServiceManager = serviceManager;
+            UserService = serviceManager.ApplicationUserService;
         }
 
         protected string CurretUserId
@@ -39,7 +40,7 @@ namespace CribMaker.Controllers.Abstract
                     throw new ArgumentException("Use this property only in authorize context!");
                 }
 
-                return _сurrentUser ?? (_сurrentUser = ServiceManager.ApplicationUserService.GetByUserName(userName));
+                return _сurrentUser ?? (_сurrentUser = UserService.GetByUserName(userName));
             }
         }
     }
