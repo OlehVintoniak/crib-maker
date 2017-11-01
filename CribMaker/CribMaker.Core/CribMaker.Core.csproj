@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Consts\Consts.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Data\Configurations\ApplicationUserConfigurations.cs" />
     <Compile Include="Data\Configurations\CribConfiguration.cs" />
     <Compile Include="Data\Configurations\PupilConfiguration.cs" />
     <Compile Include="Data\Entities\Abstract\Entity.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Repositories\Factory\RepositoryManager.cs" />
     <Compile Include="Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Repositories\Impl\ApplicationUserRepository.cs" />
+    <Compile Include="Repositories\IPupilRepository.cs" />
+    <Compile Include="Repositories\PupilRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

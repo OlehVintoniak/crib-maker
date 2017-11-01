@@ -3,5 +3,7 @@
     public interface IRepositoryManager
     {
         IApplicationUserRepository ApplicationUsers { get; }
+
+        IPupilRepository Pupils { get; }
     }
 }

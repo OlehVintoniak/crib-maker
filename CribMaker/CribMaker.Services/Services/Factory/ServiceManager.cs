@@ -15,6 +15,7 @@ namespace CribMaker.Services.Services.Factory
 
         #region Private Services Fields
         private IApplicationUserService _applicationUserService;
+        private IPupilService _pupilService;
         #endregion
 
         public ServiceManager(IUnitOfWork unitOfWork, IRepositoryManager repositoryManager)
@@ -25,5 +26,8 @@ namespace CribMaker.Services.Services.Factory
 
         public IApplicationUserService ApplicationUserService
             => _applicationUserService ?? (_applicationUserService = new ApplicationUserService(_unitOfWork, _repositoryManager));
+
+        public IPupilService PupilService
+            => _pupilService ?? (_pupilService = new PupilService(_unitOfWork, _repositoryManager));
     }
 }

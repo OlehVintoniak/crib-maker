@@ -3,5 +3,7 @@
     public interface IServiceManager
     {
         IApplicationUserService ApplicationUserService { get; }
+
+        IPupilService PupilService { get; }
     }
 }

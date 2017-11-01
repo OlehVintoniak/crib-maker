@@ -24,6 +24,7 @@ namespace CribMaker.Core.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new ApplicationUserConfigurations());
             modelBuilder.Configurations.Add(new FormConfiguration());
             modelBuilder.Configurations.Add(new CribConfiguration());
             modelBuilder.Configurations.Add(new PupilConfiguration());

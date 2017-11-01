@@ -9,7 +9,7 @@ namespace CribMaker.Core.Repositories.Factory
 
         #region Private Repository fields
         private IApplicationUserRepository _applicationUserRepository;
-
+        private IPupilRepository _pupilRepository;
         #endregion
 
         public RepositoryManager(ApplicationDbContext context)
@@ -19,5 +19,9 @@ namespace CribMaker.Core.Repositories.Factory
 
         public IApplicationUserRepository ApplicationUsers
             => _applicationUserRepository ?? (_applicationUserRepository = new ApplicationUserRepository(_context));
+
+        public IPupilRepository Pupils
+            => _pupilRepository ?? (_pupilRepository = new PupilRepository(_context));
+
     }
 }

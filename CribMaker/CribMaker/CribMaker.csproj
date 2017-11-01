@@ -223,12 +223,15 @@
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PupilsController.cs" />
+    <Compile Include="Exstensions\Exstensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PupilViewModels.cs" />
     <Compile Include="Modules\EfModule.cs" />
     <Compile Include="Modules\RepositoryModule.cs" />
     <Compile Include="Modules\ServiceModule.cs" />
@@ -4693,6 +4696,11 @@
     <Content Include="Views\Forms\Details.cshtml" />
     <Content Include="Views\Forms\Edit.cshtml" />
     <Content Include="Views\Forms\Index.cshtml" />
+    <Content Include="Views\Pupils\Create.cshtml" />
+    <Content Include="Views\Pupils\Delete.cshtml" />
+    <Content Include="Views\Pupils\Details.cshtml" />
+    <Content Include="Views\Pupils\Edit.cshtml" />
+    <Content Include="Views\Pupils\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

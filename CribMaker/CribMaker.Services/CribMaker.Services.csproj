@@ -60,6 +60,8 @@
     <Compile Include="Services\Abstract\EntityService.cs" />
     <Compile Include="Services\Abstract\IEntityService.cs" />
     <Compile Include="Services\Impl\ApplicationUserService.cs" />
+    <Compile Include="Services\Impl\PupilService.cs" />
+    <Compile Include="Services\IPupilService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CribMaker.Core\CribMaker.Core.csproj">
