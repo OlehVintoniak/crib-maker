@@ -1,20 +1,31 @@
-﻿using CribMaker.Core.Data;
-using CribMaker.Core.Repositories.Abstract;
+﻿#region
+
+using System.Web;
+using CribMaker.Core.Data;
+using CribMaker.Core.Data.Entities;
 using CribMaker.Core.Repositories.Factory;
 using CribMaker.Services.Services.Factory;
-using System.Web;
+using CribMaker.Core.Repositories.Abstract;
+
+#endregion
 
 namespace CribMaker.Helpers
 {
     public class SessionHelper
     {
+        private static readonly ApplicationDbContext Context = ApplicationDbContext.Create();
+        private static readonly ServiceManager ServiceManager = new ServiceManager(new UnitOfWork(Context), new RepositoryManager(Context));
+
+        private static ApplicationUser AppUser =>
+             ServiceManager.ApplicationUserService.GetByUserName(HttpContext.Current.User.Identity.Name);
         public static string GetCurrentUserNameLastName()
         {
-            var context = ApplicationDbContext.Create();
-            var serviceManager = new ServiceManager(new UnitOfWork(context),new RepositoryManager(context));
-            var userName = HttpContext.Current.User.Identity.Name;
-            var appUser = serviceManager.ApplicationUserService.GetByUserName(userName);
-            return $"{appUser.FirstName} {appUser.LastName}";
+            return $"{AppUser.FirstName} {AppUser.LastName}";
+        }
+
+        public static bool IsUserInForm()
+        {
+            return AppUser.PupilId == null;
         }
     }
 }

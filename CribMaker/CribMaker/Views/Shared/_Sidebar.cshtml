@@ -32,30 +32,32 @@
                 </li>
                 @if (Request.IsAuthenticated)
                 {
-                    @*<li><a href="@Url.Action("Index", "Profile")"><i class="fa fa-address-book-o" aria-hidden="true"></i>Profiles</a></li>
-                        <li><a href="@Url.Action("Index", "Organisations")"><i class="fa fa-users" aria-hidden="true"></i>Organisations</a></li>
-                        <li><a href="@Url.Action("Index", "Employees")"><i class="fa fa-user" aria-hidden="true"></i>Employees</a></li>
-                        <li><a href="@Url.Action("Index", "Holidays")"><i class="fa fa-calendar-o" aria-hidden="true"></i>Holidays</a></li>
-                        <li><a href="@Url.Action("Index", "PublicHolidays")"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Public Holidays</a></li>
-                        <li><a href="@Url.Action("Index", "Report")"><i class="fa fa-table" aria-hidden="true"></i>Report</a></li>
-                        <li><a href="@Url.Action("Index", "Chat")"><i class="fa fa-comments" aria-hidden="true"></i>Chat</a></li>
-                        <li><a href="@Url.Action("Index", "UserTasks")"><i class="fa fa-tasks" aria-hidden="true"></i>Tasks</a></li>*@
+                    <li><a href="@Url.Action("Details","Forms")"></a><i class="fa fa-graduation-cap" aria-hidden="true"></i>Клас</li>
+                    
+
+                        @*<li><a href="@Url.Action("Index", "Profile")"><i class="fa fa-address-book-o" aria-hidden="true"></i>Profiles</a></li>
+                            <li><a href="@Url.Action("Index", "Organisations")"><i class="fa fa-users" aria-hidden="true"></i>Organisations</a></li>
+                            <li><a href="@Url.Action("Index", "Employees")"><i class="fa fa-user" aria-hidden="true"></i>Employees</a></li>
+                            <li><a href="@Url.Action("Index", "Holidays")"><i class="fa fa-calendar-o" aria-hidden="true"></i>Holidays</a></li>
+                            <li><a href="@Url.Action("Index", "PublicHolidays")"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>Public Holidays</a></li>
+                            <li><a href="@Url.Action("Index", "Report")"><i class="fa fa-table" aria-hidden="true"></i>Report</a></li>
+                            <li><a href="@Url.Action("Index", "Chat")"><i class="fa fa-comments" aria-hidden="true"></i>Chat</a></li>
+                            <li><a href="@Url.Action("Index", "UserTasks")"><i class="fa fa-tasks" aria-hidden="true"></i>Tasks</a></li>*@
 
                 }
             </ul>
             @if (User.IsInRole("Admin"))
             {
-                <h3>Адмін. панель</h3>
-                        <ul class="nav side-menu">
-                            <li>
-                                <a><i class="fa fa-gears" aria-hidden="true"></i>Керуваня<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li>@Html.ActionLink("Класи", "Index", "Forms")</li>
-                                    <li>@Html.ActionLink("Добавити учня", "Index", "Pupils")</li>
-                                </ul>
-                            </li>
-
+                <ul class="nav side-menu">
+                    <li>
+                        <a><i class="fa fa-gears" aria-hidden="true"></i>Адмін. панель<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li>@Html.ActionLink("Класи", "Index", "Forms")</li>
+                            <li>@Html.ActionLink("Добавити учня", "Index", "Pupils")</li>
                         </ul>
+                    </li>
+
+                </ul>
             }
         </div>
     </div>
