@@ -14,10 +14,10 @@ namespace CribMaker.Controllers.Abstract
     public class GeneralController : Controller
     {
         private ApplicationUser _сurrentUser;
-        protected readonly IApplicationUserService UserService;
+        private readonly IApplicationUserService _userService;
         protected GeneralController(IServiceManager serviceManager)
         {
-            UserService = serviceManager.ApplicationUserService;
+            _userService = serviceManager.ApplicationUserService;
         }
 
         protected string CurretUserId
@@ -39,8 +39,7 @@ namespace CribMaker.Controllers.Abstract
                 {
                     throw new ArgumentException("Use this property only in authorize context!");
                 }
-
-                return _сurrentUser ?? (_сurrentUser = UserService.GetByUserName(userName));
+                return _сurrentUser ?? (_сurrentUser = _userService.GetByUserName(userName));
             }
         }
     }

@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using CribMaker.Core.Data.Entities.Abstract;
 
 namespace CribMaker.Core.Data.Entities
 {
-    public class Form : Entity<int>
+    public class Subject : Entity<int>
     {
-        [DisplayName("Клас")]
         public string Name { get; set; }
 
-        public virtual ICollection<Pupil> Pupils { get; set; }
         public virtual ICollection<HomeWork> HomeWorks { get; set; }
 
-        public Form()
+        public Subject()
         {
-            Pupils = new List<Pupil>();
             HomeWorks = new List<HomeWork>();
         }
     }

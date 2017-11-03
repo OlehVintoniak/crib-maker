@@ -38,6 +38,11 @@ body {
     margin-right: 0.3em;
 }
 
+.btn-homework {
+    margin-top: 10px;
+    float: right;
+}
+
 /*Chat styles*/
 
 #message-container {

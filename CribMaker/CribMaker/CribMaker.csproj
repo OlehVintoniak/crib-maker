@@ -222,6 +222,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeWorkController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PupilsController.cs" />
     <Compile Include="Exstensions\Exstensions.cs" />
@@ -4701,6 +4702,11 @@
     <Content Include="Views\Pupils\Details.cshtml" />
     <Content Include="Views\Pupils\Edit.cshtml" />
     <Content Include="Views\Pupils\Index.cshtml" />
+    <Content Include="Views\HomeWork\Create.cshtml" />
+    <Content Include="Views\HomeWork\Delete.cshtml" />
+    <Content Include="Views\HomeWork\Details.cshtml" />
+    <Content Include="Views\HomeWork\Edit.cshtml" />
+    <Content Include="Views\HomeWork\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

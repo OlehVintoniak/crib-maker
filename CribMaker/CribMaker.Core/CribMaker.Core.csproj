@@ -57,14 +57,17 @@
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\Configurations\ApplicationUserConfigurations.cs" />
     <Compile Include="Data\Configurations\CribConfiguration.cs" />
+    <Compile Include="Data\Configurations\HomeWorkConfigurations.cs" />
     <Compile Include="Data\Configurations\PupilConfiguration.cs" />
     <Compile Include="Data\Entities\Abstract\Entity.cs" />
     <Compile Include="Data\Entities\Abstract\IEntity.cs" />
     <Compile Include="Data\Entities\ApplicationUser.cs" />
     <Compile Include="Data\Entities\Crib.cs" />
     <Compile Include="Data\Entities\Form.cs" />
+    <Compile Include="Data\Entities\HomeWork.cs" />
     <Compile Include="Data\Entities\Pupil.cs" />
     <Compile Include="Data\Configurations\FormConfiguration.cs" />
+    <Compile Include="Data\Entities\Subject.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\CreateWithSeedIfNotExist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
