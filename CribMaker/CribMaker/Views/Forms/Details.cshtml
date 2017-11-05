@@ -5,6 +5,8 @@
 
 @{
     ViewBag.Title = "Details";
+    var subjects = (List<Subject>) ViewBag.Subjects;
+    var sIds = subjects.Select(ss => ss.Id).ToList();
 }
 
 <h2>@Model.Name</h2>
@@ -18,18 +20,19 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs">
                             <h2>Домашні завдання</h2>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="container">
                             <div class="btn-group btn-homework" role="group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" id="subjectId" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Всі предмети
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" >
                                     @foreach (Subject subject in ViewBag.Subjects)
                                     {
-                                        <li>@Html.ActionLink(subject.Name, "Create", "HomeWork")</li>
+                                        <li><a href="#">@subject.Name</a></li>
                                     }
                                 </ul>
+
                                 @if (User.IsInRole(Consts.AdminRole))
                                 {
                                     @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new { @class = "btn btn-success" })
@@ -73,7 +76,30 @@
         </div>
     </div>
 </div>
-@*<p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
+@section scripts{
+
+    <script>
+        $(document).ready(function() {
+            var subjectId = $("#subjectId");
+            var formId = @Model.Id;
+            subjectId.change(function() {
+                getHomeworks();
+            });
+
+            function getHomeworks() {
+                $.ajax({
+                    url: '@Url.Action("HomeWorksBySubject", "HomeWork")',
+                    data: {
+                        subjectId: subjectId,
+                        formId: formId
+                    },
+                    dataType: 'html',
+                    success: function(data) {
+                        $("#calendar").html(data);
+                    }
+                });
+            }
+        });
+
+    </script>
+}

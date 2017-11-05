@@ -131,6 +131,13 @@ namespace CribMaker.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult HomeWorksBySubject(int subjectId, int formId)
+        {
+            var homeWorks = _db.HomeWorks.Select(homeWork => homeWork)
+                .Where(h => h.FormId == formId && h.SubjectId == subjectId).ToList();
+            return PartialView("_HomeWorkList", homeWorks);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
