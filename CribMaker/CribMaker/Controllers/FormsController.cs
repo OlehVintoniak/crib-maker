@@ -36,6 +36,7 @@ namespace CribMaker.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Form form = db.Forms.Find(id);
+            ViewBag.Subjects = db.Subjects.ToList();
             if (form == null)
             {
                 return HttpNotFound();

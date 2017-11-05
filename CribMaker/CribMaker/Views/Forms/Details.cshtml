@@ -1,4 +1,5 @@
 ﻿@using CribMaker.Core.Consts
+@using CribMaker.Core.Data.Entities
 @using CribMaker.Helpers
 @model CribMaker.Core.Data.Entities.Form
 
@@ -18,10 +19,22 @@
                             <h2>Домашні завдання</h2>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            @if (User.IsInRole(Consts.AdminRole))
-                            {
-                                @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new { @class = "btn btn-success btn-homework" })
-                            }
+                            <div class="btn-group btn-homework" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Всі предмети
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach (Subject subject in ViewBag.Subjects)
+                                    {
+                                        <li>@Html.ActionLink(subject.Name, "Create", "HomeWork")</li>
+                                    }
+                                </ul>
+                                @if (User.IsInRole(Consts.AdminRole))
+                                {
+                                    @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new { @class = "btn btn-success" })
+                                }
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -29,7 +42,7 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-xs-12">
-
+                            @Html.Partial("_HomeWorkList", Model.HomeWorks)
                         </div>
                     </div>
                 </div>

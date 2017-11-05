@@ -13,120 +13,111 @@ using CribMaker.Services.Services.Factory;
 
 namespace CribMaker.Controllers
 {
-    public class HomeWorkController : GeneralController
+    public class SubjectsController : GeneralController
     {
-        public HomeWorkController(IServiceManager serviceManager) : base(serviceManager)
+        public SubjectsController(IServiceManager serviceManager) : base(serviceManager)
         {
         }
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: HomeWork
+        // GET: Subjects
         public ActionResult Index()
         {
-            var homeWorks = _db.HomeWorks.Include(h => h.Form).Include(h => h.Subject);
-            return View(homeWorks.ToList());
+            return View(_db.Subjects.ToList());
         }
 
-        // GET: HomeWork/Details/5
+        // GET: Subjects/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeWork homeWork = _db.HomeWorks.Find(id);
-            if (homeWork == null)
+            Subject subject = _db.Subjects.Find(id);
+            if (subject == null)
             {
                 return HttpNotFound();
             }
-            return View(homeWork);
+            return View(subject);
         }
 
-        // GET: HomeWork/Create
+        // GET: Subjects/Create
         public ActionResult Create()
         {
-            ViewBag.FormId = new SelectList(_db.Forms, "Id", "Name");
-            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name");
             return View();
         }
 
-        // POST: HomeWork/Create
+        // POST: Subjects/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HomeWork homeWork)
+        public ActionResult Create(Subject subject)
         {
             if (ModelState.IsValid)
             {
-                _db.HomeWorks.Add(homeWork);
+                _db.Subjects.Add(subject);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FormId = new SelectList(_db.Forms, "Id", "Name", homeWork.FormId);
-            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", homeWork.SubjectId);
-            return View(homeWork);
+            return View(subject);
         }
 
-        // GET: HomeWork/Edit/5
+        // GET: Subjects/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeWork homeWork = _db.HomeWorks.Find(id);
-            if (homeWork == null)
+            Subject subject = _db.Subjects.Find(id);
+            if (subject == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.FormId = new SelectList(_db.Forms, "Id", "Name", homeWork.FormId);
-            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", homeWork.SubjectId);
-            return View(homeWork);
+            return View(subject);
         }
 
-        // POST: HomeWork/Edit/5
+        // POST: Subjects/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(HomeWork homeWork)
+        public ActionResult Edit(Subject subject)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(homeWork).State = EntityState.Modified;
+                _db.Entry(subject).State = EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FormId = new SelectList(_db.Forms, "Id", "Name", homeWork.FormId);
-            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", homeWork.SubjectId);
-            return View(homeWork);
+            return View(subject);
         }
 
-        // GET: HomeWork/Delete/5
+        // GET: Subjects/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HomeWork homeWork = _db.HomeWorks.Find(id);
-            if (homeWork == null)
+            Subject subject = _db.Subjects.Find(id);
+            if (subject == null)
             {
                 return HttpNotFound();
             }
-            return View(homeWork);
+            return View(subject);
         }
 
-        // POST: HomeWork/Delete/5
+        // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            HomeWork homeWork = _db.HomeWorks.Find(id);
-            if(homeWork == null) return RedirectToAction("Index");
-            _db.HomeWorks.Remove(homeWork);
+            Subject subject = _db.Subjects.Find(id);
+            if (subject == null) return RedirectToAction("Index");
+            _db.Subjects.Remove(subject);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -139,5 +130,7 @@ namespace CribMaker.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }

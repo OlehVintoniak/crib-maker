@@ -1,0 +1,22 @@
+﻿@model ICollection<CribMaker.Core.Data.Entities.HomeWork>
+@foreach (var homeWork in Model)
+{
+    <div class="tile-stats">
+        <div class="col-md-10 col-sm-10 col-xs-12">
+            <div class="count">
+                <h2>@homeWork.Subject.Name</h2>
+            </div>
+            <h3>
+                @homeWork.Text
+            </h3>
+            <p>
+                @homeWork.Date
+            </p>
+        </div>
+        <div class="col-md-2 col-sm-2 hidden-xs">
+            <div class="icon">
+                <i class="fa fa-caret-square-o-right"></i>
+            </div>
+        </div>
+    </div>
+}

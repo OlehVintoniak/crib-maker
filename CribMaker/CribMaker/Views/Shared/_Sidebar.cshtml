@@ -33,23 +33,22 @@
                     {
                         <li>
                             <a href="@Url.Action("Details","Forms", new{ id=SessionHelper.CurrentForm().Id})"><i class="fa fa-graduation-cap" aria-hidden="true"></i>@SessionHelper.CurrentForm().Name клас</a>
-                        </li>    
+                        </li>
+                    }
+                    if (User.IsInRole(Consts.AdminRole))
+                    {
+                        <li>
+                            <a><i class="fa fa-gears" aria-hidden="true"></i>Адмін. панель<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li>@Html.ActionLink("Класи", "Index", "Forms")</li>
+                                <li>@Html.ActionLink("Предмети","Index","Subjects")</li>
+                                <li>@Html.ActionLink("Учні", "Index", "Pupils")</li>
+                            </ul>
+                        </li>
                     }
                 }
             </ul>
-            @if (User.IsInRole(Consts.AdminRole))
-            {
-                <ul class="nav side-menu">
-                    <li>
-                        <a><i class="fa fa-gears" aria-hidden="true"></i>Адмін. панель<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li>@Html.ActionLink("Класи", "Index", "Forms")</li>
-                            <li>@Html.ActionLink("Добавити учня", "Index", "Pupils")</li>
-                        </ul>
-                    </li>
 
-                </ul>
-            }
         </div>
     </div>
     @if (Request.IsAuthenticated)
