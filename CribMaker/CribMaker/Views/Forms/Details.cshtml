@@ -5,8 +5,6 @@
 
 @{
     ViewBag.Title = "Details";
-    var subjects = (List<Subject>) ViewBag.Subjects;
-    var sIds = subjects.Select(ss => ss.Id).ToList();
 }
 
 <h2>@Model.Name</h2>
@@ -17,25 +15,26 @@
             <div class="x_panel">
                 <div class="x_title">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs">
+                        <div class="col-lg-6 hidden-md hidden-sm hidden-xs">
                             <h2>Домашні завдання</h2>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="container">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" >
                             <div class="btn-group btn-homework" role="group">
-                                <button type="button" id="subjectId" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Всі предмети
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Предмети
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu" >
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)" id="all" class="subjectFilter">Всі</a></li>
                                     @foreach (Subject subject in ViewBag.Subjects)
                                     {
-                                        <li><a href="#">@subject.Name</a></li>
+                                        <li><a href="javascript:void(0)" id="@subject.Id" class="subjectFilter">@subject.Name</a></li>
                                     }
                                 </ul>
-
+                                <button class="btn btn-primary onTomorow">На завтра</button>
                                 @if (User.IsInRole(Consts.AdminRole))
                                 {
-                                    @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new { @class = "btn btn-success" })
+                                    @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new {@class = "btn btn-success"})
                                 }
                             </div>
                         </div>
@@ -45,7 +44,9 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-xs-12">
+                            <div id="container">
                             @Html.Partial("_HomeWorkList", Model.HomeWorks)
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,29 +78,51 @@
     </div>
 </div>
 @section scripts{
-
     <script>
         $(document).ready(function() {
-            var subjectId = $("#subjectId");
-            var formId = @Model.Id;
-            subjectId.change(function() {
-                getHomeworks();
+
+            $(".subjectFilter").click(function (e) {
+                e.preventDefault();
+                var id = $(this).attr("id");
+                if (id === "all") {
+                    window.location.reload();
+                } else {
+                    getHomeworks(id, @Model.Id);
+                }
             });
 
-            function getHomeworks() {
+            $(".onTomorow").click(function(e) {
+                getHomeworksOnTomorrow(@Model.Id);
+            });
+
+            function getHomeworks(subjectId, formId) {
                 $.ajax({
                     url: '@Url.Action("HomeWorksBySubject", "HomeWork")',
+                type: "GET",
+                data: {
+                    subjectId: subjectId,
+                    formId: formId
+                },
+                dataType: 'html',
+                success: function (data) {
+                    $("#container").html(data);
+                }
+                });
+            }
+
+            function getHomeworksOnTomorrow(formId) {
+                $.ajax({
+                    url: '@Url.Action("HomewHorksOnTomorow", "HomeWork")',
+                    type: "GET",
                     data: {
-                        subjectId: subjectId,
                         formId: formId
                     },
                     dataType: 'html',
-                    success: function(data) {
-                        $("#calendar").html(data);
+                    success: function (data) {
+                        $("#container").html(data);
                     }
                 });
             }
         });
-
     </script>
 }

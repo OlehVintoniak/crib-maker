@@ -4714,6 +4714,7 @@
     <Content Include="Views\Subjects\Edit.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Shared\_HomeWorkList.cshtml" />
+    <Content Include="Views\Shared\_ForTomorowNotificationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
-﻿using CribMaker.Core.Data.Entities.Abstract;
-using System;
+﻿using System;
 using System.ComponentModel;
+using CribMaker.Core.Data.Entities.Abstract;
 using System.ComponentModel.DataAnnotations;
 
 namespace CribMaker.Core.Data.Entities
@@ -10,6 +10,7 @@ namespace CribMaker.Core.Data.Entities
         [DisplayName("Домашнє завдання")]
         public string Text { get; set; }
 
+        [DisplayName("Дата")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
 

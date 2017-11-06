@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using CribMaker.Core.Data;
 using CribMaker.Core.Data.Entities;
 using System.Data.Entity;
@@ -133,10 +134,34 @@ namespace CribMaker.Controllers
 
         public ActionResult HomeWorksBySubject(int subjectId, int formId)
         {
-            var homeWorks = _db.HomeWorks.Select(homeWork => homeWork)
-                .Where(h => h.FormId == formId && h.SubjectId == subjectId).ToList();
+            var homeWorks = _db.HomeWorks
+                .Where(h => h.FormId == formId && h.SubjectId == subjectId)
+                .ToList();
             return PartialView("_HomeWorkList", homeWorks);
         }
+
+        public ActionResult HomewHorksOnTomorow(int formId)
+        {
+            var homeWorks = _db.HomeWorks
+                .Where(h => h.Date.Day == DateTime.Now.Day + 1
+                    && h.Date.Month == DateTime.Now.Month
+                    && h.Date.Year == DateTime.Now.Year
+                    && h.FormId == formId)
+                .ToList();
+            return PartialView("_HomeWorkList", homeWorks);
+        }
+
+        public ActionResult HomewHorksOnTomorowNotification()
+        {
+            var homeWorks = _db.HomeWorks
+                .Where(h => h.Date.Day == DateTime.Now.Day + 1
+                            && h.Date.Month == DateTime.Now.Month
+                            && h.Date.Year == DateTime.Now.Year
+                            && h.FormId == CurrentUser.Pupil.FormId)
+                .ToList();
+            return PartialView("_ForTomorowNotificationList", homeWorks);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
