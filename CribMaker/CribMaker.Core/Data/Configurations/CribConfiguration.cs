@@ -12,6 +12,9 @@ namespace CribMaker.Core.Data.Configurations
 
             HasRequired(p => p.Pupil)
                 .WithMany(c => c.Cribs);
+
+            HasRequired(c => c.Subject)
+                .WithMany(s => s.Cribs);
         }
     }
 }

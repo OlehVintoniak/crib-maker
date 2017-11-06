@@ -42,6 +42,7 @@ body {
     margin-top: 10px;
     float: right;
 }
+
 .text-with-dotes {
     display: inline-block;
     text-overflow: ellipsis;
@@ -49,8 +50,36 @@ body {
     width: 100%;
 }
 
-/*Chat styles*/
+.hw_container {
+    height: 700px;
+    overflow: auto;
+}
 
+.form_pupils_container {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.list-inline.widget_profile_box li {
+    width: 33%;
+}
+
+ul.widget_profile_box li .profile_img.pupil_face {
+    display: block;
+    margin: auto;
+    margin-top: -28px;
+}
+ul.widget_profile_box li:first-child {
+    width: 33%;
+}
+
+.pupiloftheweek_name {
+    padding-top: 10px;
+    text-align: center;
+}
+
+
+/*Chat styles*/
 #message-container {
     overflow-y: scroll;
     max-height: 430px;

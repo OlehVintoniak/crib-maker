@@ -11,6 +11,7 @@ namespace CribMaker.Core.Data.Entities
 
         public virtual ICollection<Pupil> Pupils { get; set; }
         public virtual ICollection<HomeWork> HomeWorks { get; set; }
+        public int? PupilOfTheWeekId { get; set; }
 
         public Form()
         {

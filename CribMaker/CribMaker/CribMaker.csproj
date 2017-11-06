@@ -220,6 +220,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Abstract\GeneralController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CribsController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeWorkController.cs" />
@@ -339,6 +340,7 @@
     <Content Include="Content\gentelella\production\xx.html" />
     <Content Include="Content\gentelella\src\js\custom.js" />
     <Content Include="Content\gentelella\src\js\helpers\smartresize.js" />
+    <Content Include="Content\user.png" />
     <Content Include="Content\gentelella\vendors\animate.css\animate.css" />
     <Content Include="Content\gentelella\vendors\animate.css\animate.min.css" />
     <Content Include="Content\gentelella\vendors\animate.css\gulpfile.js" />
@@ -4715,6 +4717,12 @@
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Shared\_HomeWorkList.cshtml" />
     <Content Include="Views\Shared\_ForTomorowNotificationList.cshtml" />
+    <Content Include="Views\Shared\_PupilOfTheWeek.cshtml" />
+    <Content Include="Views\Cribs\Create.cshtml" />
+    <Content Include="Views\Cribs\Delete.cshtml" />
+    <Content Include="Views\Cribs\Details.cshtml" />
+    <Content Include="Views\Cribs\Edit.cshtml" />
+    <Content Include="Views\Cribs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

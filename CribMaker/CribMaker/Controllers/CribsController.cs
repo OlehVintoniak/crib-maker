@@ -1,12 +1,11 @@
 ﻿#region
 
+using System.Net;
+using System.Linq;
+using System.Web.Mvc;
+using System.Data.Entity;
 using CribMaker.Core.Data;
 using CribMaker.Core.Data.Entities;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Http.Results;
-using System.Web.Mvc;
 using CribMaker.Controllers.Abstract;
 using CribMaker.Services.Services.Factory;
 
@@ -14,127 +13,122 @@ using CribMaker.Services.Services.Factory;
 
 namespace CribMaker.Controllers
 {
-    //TODO: make with services, (but not critical)
-    public class FormsController : GeneralController
+    public class CribsController : GeneralController
     {
-        public FormsController(IServiceManager serviceManager) : base(serviceManager)
+        public CribsController(IServiceManager serviceManager) : base(serviceManager)
         {
 
         }
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: Forms
+        // GET: Cribs
         public ActionResult Index()
         {
-            return View(db.Forms.ToList());
+            var cribs = _db.Cribs.Include(c => c.Pupil).Include(c => c.Subject);
+            return View(cribs.ToList());
         }
 
-        // GET: Forms/Details/5
+        // GET: Cribs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Form form = db.Forms.Find(id);
-            ViewBag.Subjects = db.Subjects.ToList();
-            if (form == null)
+            Crib crib = _db.Cribs.Find(id);
+            if (crib == null)
             {
                 return HttpNotFound();
             }
-            return View(form);
+            return View(crib);
         }
 
-        // GET: Forms/Create
+        // GET: Cribs/Create
         public ActionResult Create()
         {
+            ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id");
+            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name");
             return View();
         }
 
-        // POST: Forms/Create
+        // POST: Cribs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Form form)
+        public ActionResult Create(Crib crib)
         {
             if (ModelState.IsValid)
             {
-                db.Forms.Add(form);
-                db.SaveChanges();
+                _db.Cribs.Add(crib);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(form);
+            ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id", crib.PupilId);
+            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", crib.SubjectId);
+            return View(crib);
         }
 
-        // GET: Forms/Edit/5
+        // GET: Cribs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Form form = db.Forms.Find(id);
-            if (form == null)
+            Crib crib = _db.Cribs.Find(id);
+            if (crib == null)
             {
                 return HttpNotFound();
             }
-            return View(form);
+            ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id", crib.PupilId);
+            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", crib.SubjectId);
+            return View(crib);
         }
 
-        // POST: Forms/Edit/5
+        // POST: Cribs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Form form)
+        public ActionResult Edit(Crib crib)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(form).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(crib).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(form);
+            ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id", crib.PupilId);
+            ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", crib.SubjectId);
+            return View(crib);
         }
 
-        public ActionResult SetPupilOfTheWeek(int formId, int pupilId)
-        {
-            var form = db.Forms.FirstOrDefault(f => f.Id == formId);
-            if (form != null)
-            {
-                form.PupilOfTheWeekId = pupilId;
-            }
-            db.SaveChanges();
-            return RedirectToAction("Details", new{id = formId});
-        }
-
-        // GET: Forms/Delete/5
+        // GET: Cribs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Form form = db.Forms.Find(id);
-            if (form == null)
+            Crib crib = _db.Cribs.Find(id);
+            if (crib == null)
             {
                 return HttpNotFound();
             }
-            return View(form);
+            return View(crib);
         }
 
-        // POST: Forms/Delete/5
+        // POST: Cribs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Form form = db.Forms.Find(id);
-            if (form == null) return RedirectToAction("Index");
-
-            db.Forms.Remove(form);
-            db.SaveChanges();
+            Crib crib = _db.Cribs.Find(id);
+            if(crib == null) return RedirectToAction("Index");
+            _db.Cribs.Remove(crib);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -142,7 +136,7 @@ namespace CribMaker.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

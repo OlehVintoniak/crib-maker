@@ -117,6 +117,13 @@ namespace CribMaker.Controllers
             return View(pupil);
         }
 
+        public ActionResult PupilOfTheWeek(int formId)
+        {
+            var form = db.Forms.FirstOrDefault(f => f.Id == formId);
+            var pupilOfTheWeek = db.Pupils.FirstOrDefault(p => p.Id == form.PupilOfTheWeekId);
+            return PartialView("_PupilOfTheWeek", pupilOfTheWeek);
+        }
+
         // GET: Pupils/Delete/5
         public ActionResult Delete(int? id)
         {

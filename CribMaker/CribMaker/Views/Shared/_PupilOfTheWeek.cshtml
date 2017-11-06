@@ -1,0 +1,48 @@
+﻿@using CribMaker.Core.Consts
+@model CribMaker.Core.Data.Entities.Pupil
+@{
+    var firstName = Model == null ? "Ім'я" : Model.ApplicationUser.FirstName;
+    var lastName = Model == null ? "Прізвище" : Model.ApplicationUser.LastName;
+}
+<div class="x_panel">
+    <div class="x_content">
+        <div class="flex">
+            <ul class="list-inline widget_profile_box">
+                <li>
+                    <a>
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <img src="~/Content/user.png" alt="..." class="img-circle profile_img pupil_face">
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <h3 class="pupiloftheweek_name">@firstName @lastName</h3>
+        <div class="flex">
+            <ul class="list-inline count2">
+                <li>
+                    <h3>123</h3>
+                    <span>Articles</span>
+                </li>
+                <li>
+                    <h3>1234</h3>
+                    <span>Followers</span>
+                </li>
+                <li>
+                    <h3>123</h3>
+                    <span>Following</span>
+                </li>
+            </ul>
+        </div>
+        <p>
+            Заслуги учня.
+        </p>
+    </div>
+</div>
+

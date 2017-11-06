@@ -8,10 +8,12 @@ namespace CribMaker.Core.Data.Entities
         public string Name { get; set; }
 
         public virtual ICollection<HomeWork> HomeWorks { get; set; }
+        public virtual ICollection<Crib> Cribs { get; set; }
 
         public Subject()
         {
             HomeWorks = new List<HomeWork>();
+            Cribs = new List<Crib>();
         }
     }
 }
