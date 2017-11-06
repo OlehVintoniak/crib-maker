@@ -1,4 +1,5 @@
-﻿@model CribMaker.Core.Data.Entities.Crib
+﻿@using CribMaker.Helpers
+@model CribMaker.Core.Data.Entities.Crib
 
 @{
     ViewBag.Title = "Create";
@@ -37,14 +38,6 @@
                     @Html.EditorFor(model => model.IsGlobal)
                     @Html.ValidationMessageFor(model => model.IsGlobal, "", new { @class = "text-danger" })
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PupilId, "PupilId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PupilId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PupilId, "", new { @class = "text-danger" })
             </div>
         </div>
 

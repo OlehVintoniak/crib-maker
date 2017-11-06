@@ -24,8 +24,8 @@ namespace CribMaker.Controllers
         // GET: Cribs
         public ActionResult Index()
         {
-            var cribs = _db.Cribs.Include(c => c.Pupil).Include(c => c.Subject);
-            return View(cribs.ToList());
+            var cribs = _db.Cribs.Where(c => c.IsGlobal).ToList();
+            return View(cribs);
         }
 
         // GET: Cribs/Details/5
@@ -46,7 +46,6 @@ namespace CribMaker.Controllers
         // GET: Cribs/Create
         public ActionResult Create()
         {
-            ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id");
             ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name");
             return View();
         }
@@ -60,6 +59,7 @@ namespace CribMaker.Controllers
         {
             if (ModelState.IsValid)
             {
+                crib.PupilId = CurrentUser.Pupil.Id;
                 _db.Cribs.Add(crib);
                 _db.SaveChanges();
                 return RedirectToAction("Index");

@@ -55,6 +55,11 @@ body {
     overflow: auto;
 }
 
+.gc_container {
+    height: 700px;
+    overflow: auto;
+}
+
 .form_pupils_container {
     max-height: 400px;
     overflow: auto;
