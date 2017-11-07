@@ -1,12 +1,16 @@
 ﻿#region
 
+using System.Collections.Generic;
 using System.Net;
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using CribMaker.Core.Data;
 using CribMaker.Core.Data.Entities;
 using CribMaker.Controllers.Abstract;
+using CribMaker.Core.Consts;
+using CribMaker.Models;
 using CribMaker.Services.Services.Factory;
 
 #endregion
@@ -25,7 +29,8 @@ namespace CribMaker.Controllers
         public ActionResult Index()
         {
             var cribs = _db.Cribs.Where(c => c.IsGlobal).ToList();
-            return View(cribs);
+            var response = cribs.Select(c => new CribViewModel(c));
+            return View(response);
         }
 
         // GET: Cribs/Details/5
@@ -104,6 +109,24 @@ namespace CribMaker.Controllers
             ViewBag.SubjectId = new SelectList(_db.Subjects, "Id", "Name", crib.SubjectId);
             return View(crib);
         }
+
+        public ActionResult GlobalSearch(string query)
+        {
+            if (query == string.Empty)
+            {
+                var cribs = _db.Cribs.ToList();
+                var res = cribs.Select(c => new CribViewModel(c));
+                return PartialView("_CribsList", res);
+            }
+            var searchResults = _db.Database
+                .SqlQuery<Crib>("SELECT * FROM Cribs WHERE CONTAINS([Text], @queryWithAsterisk)",
+                    new SqlParameter("@queryWithAsterisk", $"\"{query}*\""))
+                .AsQueryable().Include( c=> c.Subject).Include(c=>c.Pupil).ToList();
+            var response = searchResults.Select(sr => new CribViewModel(sr, _db));
+            return PartialView("_CribsList", response);
+        }
+
+
 
         // GET: Cribs/Delete/5
         public ActionResult Delete(int? id)

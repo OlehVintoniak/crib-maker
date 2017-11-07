@@ -233,6 +233,7 @@
     </Compile>
     <Compile Include="Helpers\SessionHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CribViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PupilViewModels.cs" />
     <Compile Include="Modules\EfModule.cs" />
@@ -4723,6 +4724,7 @@
     <Content Include="Views\Cribs\Details.cshtml" />
     <Content Include="Views\Cribs\Edit.cshtml" />
     <Content Include="Views\Cribs\Index.cshtml" />
+    <Content Include="Views\Shared\_CribsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

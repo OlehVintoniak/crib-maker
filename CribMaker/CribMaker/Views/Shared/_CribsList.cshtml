@@ -1,0 +1,19 @@
+﻿@model IEnumerable<CribMaker.Models.CribViewModel>
+<div class="gc_container">
+    <ul class="list-unstyled timeline">
+        @foreach (var crib in Model)
+        {
+            <li>
+                <div class="block">
+                    <div class="tags">
+                        <a class="tag">@crib.Subject.Name</a>
+                    </div>
+                    <div class="block_content">
+                        <h2 class="title">@crib.Title</h2>
+                        <p class="excerpt"> @crib.Text</p>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

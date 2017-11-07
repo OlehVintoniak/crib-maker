@@ -1,32 +1,51 @@
-﻿@model IEnumerable<CribMaker.Core.Data.Entities.Crib>
+﻿@model IEnumerable<CribMaker.Models.CribViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
+<div class="title_left">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 form-group pull-left top_search">
+        <div class="input-group">
+            <input id="search-input" type="text" class="form-control" placeholder="Пошук..."/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>
 <div class="x_panel">
     <div class="x_title">
         <h2>Глобальні записки</h2>
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-        <div class="gc_container">
-            <ul class="list-unstyled timeline">
-                @foreach (var crib in Model)
-                {
-                    <li>
-                        <div class="block">
-                            <div class="tags">
-                                <a class="tag">@crib.Subject.Name</a>
-                            </div>
-                            <div class="block_content">
-                                <h2 class="title">@crib.Title</h2>
-                                <p class="excerpt"> @crib.Text</p>
-                            </div>
-                        </div>
-                    </li>
-                }
-            </ul>
+        <div class="container">
+        @Html.Partial("_CribsList", Model)
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function() {
+
+            $("#search-input").keyup(function() {
+                getCribs($(this).val());
+            });
+
+            function getCribs(searchQuery) {
+                $.ajax({
+                    url: '@Url.Action("GlobalSearch", "Cribs")',
+                    type: "GET",
+                    data: {
+                        query: searchQuery
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                        $("#container").html(data);
+                    }
+                });
+            }
+        });
+    </script>
+}
 
