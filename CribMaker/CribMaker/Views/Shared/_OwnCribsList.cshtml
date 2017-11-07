@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CribMaker.Models.CribViewModel>
+<div class="gc_container">
+    <ul class="list-unstyled timeline">
+        @foreach (var crib in Model)
+        {
+            <li>
+                <div class="block">
+                    <div class="tags">
+                        <a class="tag">@crib.Subject.Name</a>
+                    </div>
+                    <div class="block_content">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
+                                <h2 class="title">@crib.Title</h2>
+                                <p class="excerpt"> @crib.Text</p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                                <div class="global-swicher pull-right">
+                                    <label>
+                                        <i class="glyphicon glyphicon-globe"></i>
+                                        @if (crib.IsGlobal)
+                                        {
+                                            <input type="checkbox" class="js-switch crib-scope" checked id="@crib.Id" />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" class="js-switch crib-scope" id="@crib.Id" />
+                                        }
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+

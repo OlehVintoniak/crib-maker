@@ -6,9 +6,9 @@
 <div class="title_left">
     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 form-group pull-left top_search">
         <div class="input-group">
-            <input id="search-input" type="text" class="form-control" placeholder="Пошук..."/>
+            <input id="search-input" type="text" class="form-control" placeholder="Пошук..." />
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
+                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
             </span>
         </div>
     </div>
@@ -19,8 +19,8 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-        <div class="container">
-        @Html.Partial("_CribsList", Model)
+        <div id="container">
+            @Html.Partial("_CribsList", Model)
         </div>
     </div>
 </div>

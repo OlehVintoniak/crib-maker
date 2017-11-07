@@ -36,6 +36,15 @@ namespace CribMaker.Helpers
             }
         }
 
+        public static int CurrentPupilId()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var user = CurrentUser(context);
+                return user.PupilId.Value;
+            }
+        }
+
         #region Helpers
 
         private static ApplicationUser CurrentUser(ApplicationDbContext context)

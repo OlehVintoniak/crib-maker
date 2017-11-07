@@ -83,7 +83,9 @@ ul.widget_profile_box li:first-child {
     text-align: center;
 }
 
-
+.global-swicher {
+    margin-top: 5px;
+}
 /*Chat styles*/
 #message-container {
     overflow-y: scroll;

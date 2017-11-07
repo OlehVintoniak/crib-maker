@@ -37,6 +37,9 @@
                         <li>
                             <a href="@Url.Action("Index","Cribs",null)"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Глобальні записки</a>
                         </li>
+                        <li>
+                            <a href="@Url.Action("OwnCribs","Cribs", new {pupilId = SessionHelper.CurrentPupilId()})"><i class="fa fa-pencil" aria-hidden="true"></i>Особисті записки</a>
+                        </li>
                     }
                     if (User.IsInRole(Consts.AdminRole))
                     {

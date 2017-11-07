@@ -6,6 +6,7 @@ namespace CribMaker.Models
 {
     public class CribViewModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
         public bool IsGlobal { get; set; }
@@ -16,6 +17,7 @@ namespace CribMaker.Models
 
         public CribViewModel(Crib crib, ApplicationDbContext context)
         {
+            Id = crib.Id;
             Title = crib.Title;
             Text = crib.Text;
             IsGlobal = crib.IsGlobal;
@@ -25,6 +27,7 @@ namespace CribMaker.Models
 
         public CribViewModel(Crib crib)
         {
+            Id = crib.Id;
             Title = crib.Title;
             Text = crib.Text;
             IsGlobal = crib.IsGlobal;

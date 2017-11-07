@@ -1,0 +1,89 @@
+﻿@using CribMaker.Helpers
+@model IEnumerable<CribMaker.Models.CribViewModel>
+@{
+    var pupilId = SessionHelper.CurrentPupilId();
+}
+<div class="title_left">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 form-group pull-left top_search">
+        <div class="input-group">
+            <input id="search-input" type="text" class="form-control" placeholder="Пошук..." />
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="x_panel">
+    <div class="x_title">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
+                <h2>Особисті записки</h2>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <div class="btn-group btn-homework" role="group">
+                    @Html.ActionLink("Створити нову", "Create", "Cribs", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <div id="container">
+            @Html.Partial("_OwnCribsList", Model)
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#search-input").keyup(function() {
+                getCribs($(this).val());
+            });
+
+            $(".crib-scope").click(function() {
+                changeCribScope($(this).attr("id"));
+            });
+
+            function getCribs(searchQuery) {
+                $.ajax({
+                    url: '@Url.Action("GlobalSearch", "Cribs")',
+                    type: "GET",
+                    data: {
+                        query: searchQuery,
+                        pupilId:@pupilId
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                        $("#container").html(data);
+                        swichRefresh();
+                    }
+                });
+            }
+
+            function changeCribScope(cribId) {
+                $.ajax({
+                    url: '@Url.Action("ChangeCribScope", "Cribs")',
+                    type: "GET",
+                    data: {
+                        cribId: cribId
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                    }
+                });
+            }
+
+            function swichRefresh() {
+                if ($(".js-switch")[0]) {
+                    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+                    elems.forEach(function (html) {
+                        var switchery = new Switchery(html, {
+                            color: '#26B99A'
+                        });
+                    });
+                }    
+            }
+        });
+    </script>
+}

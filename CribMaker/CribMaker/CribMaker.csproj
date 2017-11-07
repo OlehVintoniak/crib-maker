@@ -4725,6 +4725,8 @@
     <Content Include="Views\Cribs\Edit.cshtml" />
     <Content Include="Views\Cribs\Index.cshtml" />
     <Content Include="Views\Shared\_CribsList.cshtml" />
+    <Content Include="Views\Cribs\OwnCribs.cshtml" />
+    <Content Include="Views\Shared\_OwnCribsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Web.Http.Results;
 using CribMaker.Core.Data;
 using CribMaker.Core.Data.Entities;
 using CribMaker.Controllers.Abstract;
@@ -31,6 +32,22 @@ namespace CribMaker.Controllers
             var cribs = _db.Cribs.Where(c => c.IsGlobal).ToList();
             var response = cribs.Select(c => new CribViewModel(c));
             return View(response);
+        }
+
+        public ActionResult OwnCribs(int pupilId)
+        {
+            var cribs = _db.Cribs.Where(c => c.PupilId == pupilId).ToList();
+            var response = cribs.Select(c => new CribViewModel(c));
+            return View(response);
+        }
+
+        public ActionResult ChangeCribScope(int cribId)
+        {
+            var crib = _db.Cribs.FirstOrDefault(c => c.Id == cribId);
+            if (crib == null) return Json("not found");
+            crib.IsGlobal = !crib.IsGlobal;
+            _db.SaveChanges();
+            return Json("ok");
         }
 
         // GET: Cribs/Details/5
@@ -64,10 +81,11 @@ namespace CribMaker.Controllers
         {
             if (ModelState.IsValid)
             {
-                crib.PupilId = CurrentUser.Pupil.Id;
+                var pupilid = CurrentUser.Pupil.Id;
+                crib.PupilId = pupilid;
                 _db.Cribs.Add(crib);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("OwnCribs", new{pupilId = pupilid});
             }
 
             ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id", crib.PupilId);
@@ -110,23 +128,40 @@ namespace CribMaker.Controllers
             return View(crib);
         }
 
-        public ActionResult GlobalSearch(string query)
+        public ActionResult GlobalSearch(string query, int? pupilId)
         {
-            if (query == string.Empty)
+            List<Crib> searchResults;
+            if (pupilId.HasValue)
             {
-                var cribs = _db.Cribs.ToList();
-                var res = cribs.Select(c => new CribViewModel(c));
-                return PartialView("_CribsList", res);
+                if (query == string.Empty)
+                {
+                    var cribs = _db.Cribs.Where( c=> c.PupilId == pupilId).ToList();
+                    var res = cribs.Select(c => new CribViewModel(c));
+                    return PartialView("_OwnCribsList", res);
+                }
+                searchResults = _db.Database
+                    .SqlQuery<Crib>("SELECT * FROM Cribs WHERE CONTAINS([Text], @queryWithAsterisk)",
+                        new SqlParameter("@queryWithAsterisk", $"\"{query}*\""))
+                    .AsQueryable().Where(c => c.PupilId == pupilId).ToList();
+                var response = searchResults.Select(sr => new CribViewModel(sr, _db));
+                return PartialView("_OwnCribsList", response);
             }
-            var searchResults = _db.Database
-                .SqlQuery<Crib>("SELECT * FROM Cribs WHERE CONTAINS([Text], @queryWithAsterisk)",
-                    new SqlParameter("@queryWithAsterisk", $"\"{query}*\""))
-                .AsQueryable().Include( c=> c.Subject).Include(c=>c.Pupil).ToList();
-            var response = searchResults.Select(sr => new CribViewModel(sr, _db));
-            return PartialView("_CribsList", response);
+            else
+            {
+                if (query == string.Empty)
+                {
+                    var cribs = _db.Cribs.Where(c => c.IsGlobal).ToList();
+                    var res = cribs.Select(c => new CribViewModel(c));
+                    return PartialView("_CribsList", res);
+                }
+                searchResults = _db.Database
+                    .SqlQuery<Crib>("SELECT * FROM Cribs WHERE CONTAINS([Text], @queryWithAsterisk)",
+                        new SqlParameter("@queryWithAsterisk", $"\"{query}*\""))
+                    .AsQueryable().ToList();
+                var response = searchResults.Select(sr => new CribViewModel(sr, _db));
+                return PartialView("_CribsList", response);
+            }
         }
-
-
 
         // GET: Cribs/Delete/5
         public ActionResult Delete(int? id)
