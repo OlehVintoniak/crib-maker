@@ -36,6 +36,7 @@ namespace CribMaker.Controllers
 
         public ActionResult OwnCribs(int pupilId)
         {
+            ViewBag.Subjects = _db.Subjects.ToList();
             var cribs = _db.Cribs.Where(c => c.PupilId == pupilId).ToList();
             var response = cribs.Select(c => new CribViewModel(c));
             return View(response);
@@ -48,6 +49,26 @@ namespace CribMaker.Controllers
             crib.IsGlobal = !crib.IsGlobal;
             _db.SaveChanges();
             return Json("ok");
+        }
+
+        public ActionResult GetCribsBySubject(int subjectId, int? pupilId)
+        {
+            if (pupilId.HasValue)
+            {
+                var cribs = _db.Cribs
+                    .Where(c => c.SubjectId == subjectId && c.PupilId == pupilId)
+                    .ToList();
+                var response = cribs.Select(c => new CribViewModel(c));
+                return PartialView("_OwnCribsList", response);
+            }
+            else
+            {
+                var cribs = _db.Cribs
+                    .Where(c => c.SubjectId == subjectId)
+                    .ToList();
+                var response = cribs.Select(c => new CribViewModel(c));
+                return PartialView("_CribsList", response);
+            }
         }
 
         // GET: Cribs/Details/5

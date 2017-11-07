@@ -1,4 +1,5 @@
-﻿@using CribMaker.Helpers
+﻿@using CribMaker.Core.Data.Entities
+@using CribMaker.Helpers
 @model IEnumerable<CribMaker.Models.CribViewModel>
 @{
     var pupilId = SessionHelper.CurrentPupilId();
@@ -21,7 +22,18 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
                 <div class="btn-group btn-homework" role="group">
-                    @Html.ActionLink("Створити нову", "Create", "Cribs", null, new { @class = "btn btn-success" })
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Предмети
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)" id="all" class="subjectFilter">Всі</a></li>
+                        @foreach (Subject subject in ViewBag.Subjects)
+                        {
+                            <li><a href="javascript:void(0)" id="@subject.Id" class="subjectFilter">@subject.Name</a></li>
+                        }
+                    </ul>
+                    @Html.ActionLink("Створити нову", "Create", "Cribs", null, new {@class = "btn btn-success"})
                 </div>
             </div>
         </div>
@@ -41,9 +53,35 @@
                 getCribs($(this).val());
             });
 
-            $(".crib-scope").click(function() {
+            $("#container").on("click", ".crib-scope", function () {
                 changeCribScope($(this).attr("id"));
             });
+
+            $(".subjectFilter").click(function (e) {
+                e.preventDefault();
+                var id = $(this).attr("id");
+                if (id === "all") {
+                    window.location.reload();
+                } else {
+                    getCribsBySubject(id);
+                }
+            });
+
+            function getCribsBySubject(subjectId) {
+                $.ajax({
+                    url: '@Url.Action("GetCribsBySubject", "Cribs")',
+                    type: "GET",
+                    data: {
+                        subjectId:subjectId,
+                        pupilId:@pupilId
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                        $("#container").html(data);
+                        swichRefresh();
+                    }
+                });
+            }
 
             function getCribs(searchQuery) {
                 $.ajax({
@@ -82,7 +120,7 @@
                             color: '#26B99A'
                         });
                     });
-                }    
+                }
             }
         });
     </script>
