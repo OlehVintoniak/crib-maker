@@ -1,0 +1,18 @@
+﻿@using CribMaker.Core.Consts
+@model IEnumerable<CribMaker.Core.Data.Entities.Advertisement>
+
+@{
+    ViewBag.Title = "Index";
+}
+@if (User.IsInRole(Consts.AdminRole))
+{
+    <p>
+        @Html.ActionLink("Розмістити оолошення", "Create", null, new{@class="btn btn-success"})
+    </p>
+}
+@Html.Partial("_AdvertisemetsList", Model)
+
+
+
+
+

@@ -9,7 +9,10 @@ namespace CribMaker.Core.Data.Entities
         [DisplayName("Заголовок")]
         [StringLength(50, ErrorMessage = "Заголовок занадто довгий!")]
         public string Title { get; set; }
+        [Required]
+        [DisplayName("Текст")]
         public string Text { get; set; }
+        [DisplayName("Глобальна")]
         public bool IsGlobal { get; set; }
         public int PupilId { get; set; }
         public virtual Pupil Pupil { get; set; }

@@ -17,6 +17,10 @@ namespace CribMaker.Core.Data.Configurations
             HasRequired(f => f.Form)
                 .WithMany(p => p.Pupils)
                 .WillCascadeOnDelete(false);
+
+            HasMany(p=>p.Advertisements)
+                .WithRequired(a=>a.Pupil)
+                .WillCascadeOnDelete(false);
         }
     }
 }

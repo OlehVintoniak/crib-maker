@@ -42,13 +42,13 @@ namespace CribMaker.Controllers
             return View(response);
         }
 
-        public ActionResult ChangeCribScope(int cribId)
+        public EmptyResult ChangeCribScope(int cribId)
         {
             var crib = _db.Cribs.FirstOrDefault(c => c.Id == cribId);
-            if (crib == null) return Json("not found");
+            if (crib == null) return new EmptyResult();
             crib.IsGlobal = !crib.IsGlobal;
             _db.SaveChanges();
-            return Json("ok");
+            return new EmptyResult();
         }
 
         public ActionResult GetCribsBySubject(int subjectId, int? pupilId)
@@ -106,7 +106,7 @@ namespace CribMaker.Controllers
                 crib.PupilId = pupilid;
                 _db.Cribs.Add(crib);
                 _db.SaveChanges();
-                return RedirectToAction("OwnCribs", new{pupilId = pupilid});
+                return RedirectToAction("OwnCribs", new { pupilId = pupilid });
             }
 
             ViewBag.PupilId = new SelectList(_db.Pupils, "Id", "Id", crib.PupilId);
@@ -156,7 +156,7 @@ namespace CribMaker.Controllers
             {
                 if (query == string.Empty)
                 {
-                    var cribs = _db.Cribs.Where( c=> c.PupilId == pupilId).ToList();
+                    var cribs = _db.Cribs.Where(c => c.PupilId == pupilId).ToList();
                     var res = cribs.Select(c => new CribViewModel(c));
                     return PartialView("_OwnCribsList", res);
                 }
@@ -205,10 +205,10 @@ namespace CribMaker.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Crib crib = _db.Cribs.Find(id);
-            if(crib == null) return RedirectToAction("Index");
+            if (crib == null) return RedirectToAction("OwnCribs", "Cribs", new { pupilId = CurrentUser.Pupil.Id });
             _db.Cribs.Remove(crib);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("OwnCribs", "Cribs", new { pupilId = CurrentUser.Pupil.Id });
         }
 
         protected override void Dispose(bool disposing)

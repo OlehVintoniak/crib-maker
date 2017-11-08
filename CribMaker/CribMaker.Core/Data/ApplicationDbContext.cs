@@ -21,6 +21,7 @@ namespace CribMaker.Core.Data
         public DbSet<Pupil> Pupils { get; set; }
         public DbSet<HomeWork> HomeWorks { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
 
 
         public static ApplicationDbContext Create()

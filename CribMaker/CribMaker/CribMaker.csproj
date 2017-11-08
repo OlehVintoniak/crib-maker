@@ -220,6 +220,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Abstract\GeneralController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdvertisementsController.cs" />
     <Compile Include="Controllers\CribsController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -4727,6 +4728,14 @@
     <Content Include="Views\Shared\_CribsList.cshtml" />
     <Content Include="Views\Cribs\OwnCribs.cshtml" />
     <Content Include="Views\Shared\_OwnCribsList.cshtml" />
+    <Content Include="Views\Advertisements\Create.cshtml" />
+    <Content Include="Views\Advertisements\Delete.cshtml" />
+    <Content Include="Views\Advertisements\Details.cshtml" />
+    <Content Include="Views\Advertisements\Edit.cshtml" />
+    <Content Include="Views\Advertisements\Index.cshtml" />
+    <Content Include="Views\Shared\_AdvertisemetsList.cshtml" />
+    <Content Include="Views\Shared\_Pupils.cshtml" />
+    <Content Include="Views\Shared\_ChosePupilOfTheWeekModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

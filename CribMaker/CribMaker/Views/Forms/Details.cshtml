@@ -1,16 +1,9 @@
 ﻿@using CribMaker.Core.Consts
 @using CribMaker.Core.Data.Entities
-@using CribMaker.Helpers
 @model CribMaker.Core.Data.Entities.Form
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>@Model.Name</h2>
-
 <div class="container">
     <div clas="row">
+        <h2 style="margin-left: 10px">@Model.Name</h2>
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -34,7 +27,7 @@
                                 <button class="btn btn-primary onTomorow">На завтра</button>
                                 @if (User.IsInRole(Consts.AdminRole))
                                 {
-                                    @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new { @class = "btn btn-success" })
+                                    @Html.ActionLink("Нове завдання", "Create", "HomeWork", null, new {@class = "btn btn-success"})
                                 }
                             </div>
                         </div>
@@ -53,72 +46,14 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Учні</h2>
-
-                    @if (User.IsInRole(Consts.AdminRole))
-                    {
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target=".bs-example-modal-sm">Обрати учня тижня</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    }
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="row">
-                        <div class="col-xs-12 form_pupils_container">
-                            <ul>
-                                @foreach (var pupil in Model.Pupils)
-                                {
-                                    <li>
-                                        @pupil.ApplicationUser.FirstName @pupil.ApplicationUser.LastName
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             @Html.Action("PupilOfTheWeek", "Pupils", new { formId = Model.Id })
+            @Html.Partial("_Pupils", Model)
         </div>
     </div>
 </div>
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Учень тижня:</h4>
-            </div>
-            <div class="modal-body">
-                <ul class="to_do">
-                    @if (Model != null)
-                    {
-                        foreach (var pupil in Model.Pupils)
-                        {
-                            <li>
-                                <a href="@Url.Action("SetPupilOfTheWeek", "Forms", new {formId = Model.Id, pupilId = pupil.Id})">@pupil.ApplicationUser.FirstName @pupil.ApplicationUser.LastName</a>
-                            </li>
-                        }
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_ChosePupilOfTheWeekModal", Model)
+
 @section scripts{
     <script>
         $(document).ready(function() {

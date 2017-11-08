@@ -39,6 +39,7 @@ namespace CribMaker.Core.Migrations
         {
             InitUsers(context);
             InitForms(context);
+            InitSubjects(context);
         }
 
         #region Users
@@ -100,6 +101,8 @@ namespace CribMaker.Core.Migrations
 
         #endregion
 
+        #region Forms
+
         private static void InitForms(ApplicationDbContext context)
         {
             var forms = new List<Form>();
@@ -112,15 +115,24 @@ namespace CribMaker.Core.Migrations
             }
             context.Forms.AddRange(forms);
             context.SaveChanges();
-
-            //var pupils = new List<Pupil>();
-            //pupils.Add(new Pupil
-            //{
-            //    FormId = 1,
-            //    ApplicationUser = 
-            //});
-
         }
+
+        #endregion
+
+        #region Subjects
+
+        private static void InitSubjects(ApplicationDbContext context)
+        {
+            context.Subjects.Add(new Subject {Name = "Хімія"});
+            context.Subjects.Add(new Subject {Name = "Фізика"});
+            context.Subjects.Add(new Subject {Name = "Історія"});
+            context.Subjects.Add(new Subject {Name = "Біологія" });
+            context.Subjects.Add(new Subject {Name = "Географія"});
+            context.Subjects.Add(new Subject {Name = "Математика"});
+            context.SaveChanges();
+        }
+
+        #endregion
 
 
         #region Helpers

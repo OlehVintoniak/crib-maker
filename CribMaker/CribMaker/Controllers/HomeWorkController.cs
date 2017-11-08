@@ -60,9 +60,10 @@ namespace CribMaker.Controllers
         {
             if (ModelState.IsValid)
             {
+                homeWork.FormId = CurrentUser.Pupil.FormId;
                 _db.HomeWorks.Add(homeWork);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Forms", new{id=CurrentUser.Pupil.FormId});
             }
 
             ViewBag.FormId = new SelectList(_db.Forms, "Id", "Name", homeWork.FormId);

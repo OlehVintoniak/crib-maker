@@ -27,6 +27,9 @@
                                             <input type="checkbox" class="js-switch crib-scope" id="@crib.Id" />
                                         }
                                     </label>
+                                    <label>
+                                        <a href="@Url.Action("Delete","Cribs", new{id = crib.Id})" class="crib_remove"><i class="fa fa-remove"></i></a>
+                                    </label>
                                 </div>
                             </div>
                         </div>
