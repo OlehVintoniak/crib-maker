@@ -1,0 +1,27 @@
+﻿@model CribMaker.Core.Data.Entities.Form
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Учень тижня:</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="to_do">
+                    @if (Model != null)
+                    {
+                        foreach (var pupil in Model.Pupils)
+                        {
+                            <li>
+                                <a href="@Url.Action("SetPupilOfTheWeek", "Forms", new {formId = Model.Id, pupilId = pupil.Id})">@pupil.ApplicationUser.FirstName @pupil.ApplicationUser.LastName</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

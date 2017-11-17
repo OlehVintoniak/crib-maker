@@ -61,6 +61,7 @@
     <Compile Include="Data\Configurations\PupilConfiguration.cs" />
     <Compile Include="Data\Entities\Abstract\Entity.cs" />
     <Compile Include="Data\Entities\Abstract\IEntity.cs" />
+    <Compile Include="Data\Entities\Advertisement.cs" />
     <Compile Include="Data\Entities\ApplicationUser.cs" />
     <Compile Include="Data\Entities\Crib.cs" />
     <Compile Include="Data\Entities\Form.cs" />

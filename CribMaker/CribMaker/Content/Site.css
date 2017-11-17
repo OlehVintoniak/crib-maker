@@ -86,6 +86,20 @@ ul.widget_profile_box li:first-child {
 .global-swicher {
     margin-top: 5px;
 }
+.pupiloftheweek_title {
+    margin-top: -5px;
+    text-align: center;
+}
+
+.block_content {
+    position: relative;
+}
+
+.crib_remove {
+    position: absolute;
+    top: -11px;
+    right: -3px;
+}
 /*Chat styles*/
 #message-container {
     overflow-y: scroll;
