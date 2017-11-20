@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using CribMaker.Core.Data;
 using CribMaker.Core.Data.Entities;
 using System.Data.Entity;
@@ -59,6 +60,7 @@ namespace CribMaker.Controllers
         {
             if (ModelState.IsValid)
             {
+                advertisement.DateCreated = DateTime.Now;
                 advertisement.PupilId = CurrentUser.Pupil.Id;
                 db.Advertisements.Add(advertisement);
                 db.SaveChanges();
