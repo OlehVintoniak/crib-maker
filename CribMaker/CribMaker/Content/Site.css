@@ -100,10 +100,6 @@ ul.widget_profile_box li:first-child {
     top: -11px;
     right: -3px;
 }
-
-.site_title img {
-    margin-left: -9px;
-}
 /*Chat styles*/
 #message-container {
     overflow-y: scroll;

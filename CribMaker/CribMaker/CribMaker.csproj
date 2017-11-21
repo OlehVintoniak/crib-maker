@@ -3764,7 +3764,6 @@
     <Content Include="Content\gentelella\vendors\validator\index.html" />
     <Content Include="Content\gentelella\vendors\validator\multifield.js" />
     <Content Include="Content\gentelella\vendors\validator\validator.js" />
-    <Content Include="Content\Vkontakte_icon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -4750,13 +4749,6 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Content\gentelella\vendors\devbridge-autocomplete\src\jquery.autocomplete.d.ts" />
-    <TypeScriptCompile Include="Content\gentelella\vendors\moment\moment.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CribMaker.Core\CribMaker.Core.csproj">
       <Project>{103893c6-dab9-4b8f-b863-796912f126f5}</Project>
       <Name>CribMaker.Core</Name>
@@ -4765,6 +4757,13 @@
       <Project>{eef3198b-4f12-4821-b714-ad5a4f83e8aa}</Project>
       <Name>CribMaker.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Content\gentelella\vendors\devbridge-autocomplete\src\jquery.autocomplete.d.ts" />
+    <TypeScriptCompile Include="Content\gentelella\vendors\moment\moment.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

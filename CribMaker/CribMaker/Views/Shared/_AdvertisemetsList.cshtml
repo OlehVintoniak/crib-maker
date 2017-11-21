@@ -4,7 +4,7 @@
 {
     <div class="x_panel tile">
         <div class="x_title">
-            <h2>@advertisement.DateCreated<sub><small>@advertisement.Pupil.ApplicationUser.FirstName @advertisement.Pupil.ApplicationUser.LastName</small></sub></h2>
+            <h2>@advertisement.Title<sub><small>@advertisement.Pupil.ApplicationUser.FirstName @advertisement.Pupil.ApplicationUser.LastName</small></sub></h2>
             
             <ul class="nav navbar-right panel_toolbox">
                 <li>
@@ -24,12 +24,7 @@
         </div>
         <div class="x_content">
             <div class="dashboard-widget-content">
-                <div class="bs-example" data-example-id="simple-jumbotron">
-                    <div class="jumbotron">
-                        <h1>@advertisement.Title</h1>
-                        <p style="font-size: 24px">@advertisement.Text</p>
-                    </div>
-                </div>
+                <p>@advertisement.Text</p>
             </div>
         </div>
     </div>
