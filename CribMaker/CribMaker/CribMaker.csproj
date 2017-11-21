@@ -3764,6 +3764,7 @@
     <Content Include="Content\gentelella\vendors\validator\index.html" />
     <Content Include="Content\gentelella\vendors\validator\multifield.js" />
     <Content Include="Content\gentelella\vendors\validator\validator.js" />
+    <Content Include="Content\Vkontakte_icon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -13,8 +13,8 @@
                     <span class="fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li>@Html.ActionLink("Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out pull-right"></i>Log off</a></li>
+                    <li>@Html.ActionLink("Налаштування", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out pull-right"></i>Вихід</a></li>
                 </ul>
             </li>
             @if (SessionHelper.IsUserInForm())
